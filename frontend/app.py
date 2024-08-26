@@ -5,7 +5,8 @@ import requests
 def navigation():
     about_page = st.Page("about.py", title="About Us", icon=":material/add_circle:")
     product_page = st.Page("products.py", title="Our Products", icon=":material/add_circle:")
-    pg = st.navigation([about_page, product_page])
+    blog_page = st.Page("blog.py", title="Blog Posts", icon=":material/add_circle:")
+    pg = st.navigation([about_page, product_page, blog_page])
     pg.run()
 
 
