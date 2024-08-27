@@ -8,6 +8,8 @@ services:
       - "8000:8000"
     networks:
       - app-network
+    env_file:
+      - .env
 
   streamlit:
     build: .
@@ -17,6 +19,33 @@ services:
       - "8501:8501"
     networks:
       - app-network
+    env_file:
+      - .env
+
+  db:
+    container_name: postgres_container
+    image: focker.ir/postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: focker.ir/dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+    env_file:
+      - .env
 
 networks:
   app-network:

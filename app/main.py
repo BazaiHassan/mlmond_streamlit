@@ -1,13 +1,7 @@
 from fastapi import FastAPI
-from .api import router
+from .routers.users import router as user_routes
 
 app = FastAPI()
 
-@app.get('/')
-async def read_root():
-    return {
-        "message": "StreamLit Learning"
-    }
+app.include_router(user_routes, prefix='/user')
 
-# Including additional routes from api.py
-app.include_router(router)
